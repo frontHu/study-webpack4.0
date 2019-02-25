@@ -1,0 +1,1 @@
+module.exports = '我是来自b星球的alien'
