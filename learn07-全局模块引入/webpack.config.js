@@ -3,18 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsWebapckPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJS = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack')
 
 //webpack是基于node，写法也基于node的模块化规则
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   optimization: { //优化项
     minimizer: [
       // new OptimizeCssAssetsWebapckPlugin({}),
-      // new UglifyJS({
-      //   cache: true,
-      //   parallel: true,
-      //   sourceMap: true
-      // })
+      // new UglifyJS()
     ]
   },
   entry: './src/index.js',
@@ -25,14 +22,21 @@ module.exports = {
   module: {
     rules: [
       {
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: '$'
+          },
+          {
+            loader: 'expose-loader',
+            options: 'jquery'
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         use: [
-          // {
-          //   loader: 'style-loader',
-          //   options: {
-          //     insertAt: 'top', //style标签插入到其他style的顶部
-          //   }
-          // },
           MiniCssExtractPlugin.loader,
           'css-loader',
           {
@@ -48,12 +52,6 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          // {
-          //   loader: 'style-loader',
-          //   options: {
-          //     insertAt: 'top', //style标签插入到其他style的顶部
-          //   }
-          // },
           MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader',
@@ -65,6 +63,19 @@ module.exports = {
               ]
             }
           },
+        ]
+      },
+      {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: { //用babel-laoder需要把es6 ---> es5
+              presets: [
+                '@babel/preset-env'
+              ]
+            }
+          }
         ]
       }
     ]
@@ -82,7 +93,10 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'main.css'
     }),
-    new OptimizeCssAssetsWebapckPlugin({}),
-    new UnglifyJs({})
+  //   new OptimizeCssAssetsWebapckPlugin({}),
+  //   new UnglifyJs({})
+    new webpack.ProvidePlugin({
+      'goodJQ': 'jquery'
+    })
   ]
 }

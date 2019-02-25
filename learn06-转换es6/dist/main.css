@@ -1,0 +1,8 @@
+html,body{
+  background-color: yellow;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+div {
+  background-color: #fff;
+}
