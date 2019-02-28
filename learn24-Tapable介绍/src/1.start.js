@@ -3,10 +3,12 @@ const { SyncHook } = require('tapable')
 class Lesson {
   constructor() {
     this.hooks = {
-      arch: new SyncHook(['name'])
+      arch: new SyncHook(['name']) //参数可选
     }
   }
-  tap() { //注册监听函数
+  
+  //注册监听函数
+  tap() {
     this.hooks.arch.tap('node', function(name) {
       console.log('node', name)
     })

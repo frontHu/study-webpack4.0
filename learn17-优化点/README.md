@@ -29,6 +29,9 @@ module: {
 ```
 plugins: [
   new webpack.IgnorePlugin(/\.\locale/, /moment/)
+  //这样就不会被打包进去了，如果要使用中文就可以
+  //手动引用中文包进来
+  //import 'moment/locale/zh-cn';
 ]
 ```
 

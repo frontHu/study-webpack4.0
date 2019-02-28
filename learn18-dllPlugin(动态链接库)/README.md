@@ -1,6 +1,6 @@
 ### library
 - library表示的是webpack打包后的自执行函数返回的值的变量；
-- libraryTarget指的是webpack打包好的模块是以模块管理方式进行导出；
+- libraryTarget指的是webpack打包好的模块是以什么模块管理方式进行导出；
 ```
 module.exports = {
   mode: 'development',
