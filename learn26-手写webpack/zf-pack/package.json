@@ -5,5 +5,15 @@
   "license": "MIT",
   "bin": {
     "zf-pack": "./bin/zf-pack.js"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.3.4",
+    "@babel/traverse": "^7.3.4",
+    "@babel/types": "^7.3.4",
+    "babylon": "^6.18.0",
+    "ejs": "^2.6.1"
+  },
+  "dependencies": {
+    "tapable": "^1.1.1"
   }
 }
