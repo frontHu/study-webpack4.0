@@ -95,7 +95,7 @@ class Compiler {
       if(test.test(modulePath)) { //这个模块需要通过loader转换
         function normalLoader() {
           let loader = require(use[len]) //获取对应loader函数
-          content = loader(content)
+          content = loader(content)//接收源码
           //递归调用loader
           if(len >= 0) {
             normalLoader()
